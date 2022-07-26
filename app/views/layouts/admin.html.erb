@@ -13,17 +13,30 @@
   <body>
     <header>
       <div>LOGO</div>
-      <div>
-        <nav>
-          <ul>
-            <li>商品一覧</li>
-            <li>会員一覧</li>
-            <li>注文履歴一覧</li>
-            <li>ジャンル一覧</li>
-            <li>ログアウト</li>
-          </ul>
-        </nav>
-      </div>
+      <% if admin_signed_in? %>
+        <div>
+          <nav>
+            <ul>
+              <li>商品一覧</li>
+              <li>会員一覧</li>
+              <li>注文履歴一覧</li>
+              <li>ジャンル一覧</li>
+              <li>ログアウト</li>
+            </ul>
+          </nav>
+        </div>
+      <% else %>
+        <div>
+          <nav>
+            <ul>
+              <li>About</li>
+              <li>商品一覧</li>
+              <li>新規登録</li>
+              <li>ログイン</li>
+            </ul>
+          </nav>
+        </div>
+      <% end %>
     </header>
 
     <mian>
