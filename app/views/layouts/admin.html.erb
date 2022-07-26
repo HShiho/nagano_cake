@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCakeApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div>LOGO</div>
+      <div>
+        <nav>
+          <ul>
+            <li>商品一覧</li>
+            <li>会員一覧</li>
+            <li>注文履歴一覧</li>
+            <li>ジャンル一覧</li>
+            <li>ログアウト</li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <mian>
+      <%= yield %>
+    </mian>
+
+    <footer>
+
+    </footer>
+
+  </body>
+</html>
