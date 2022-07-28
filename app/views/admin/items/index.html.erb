@@ -1,4 +1,6 @@
 <label>商品一覧</label>
+
+<!--後でプラスマークのボタンリンクに変更する-->
 <%= link_to '新規登録',new_admin_item_path %>
 <br>
 
@@ -19,10 +21,10 @@
           <%= item.id %>
         </td>
         <td>
-          <%= item.name %>
+          <%= link_to item.name, admin_item_path(item.id) %>
         </td>
         <td>
-          <%= "#{item.price.to_s(:delimited, delimiter: ',' )}" %>
+          <%= ApplicationHelper.digit_price(item.price) %>
         </td>
         <td>
           <%= item.genre.name %>
