@@ -1,14 +1,14 @@
 class Admin::ItemsController < ApplicationController
   layout 'admin'
-  
+
   def new
     @item = Item.new
-    @items = Genre.all
+    @genres = Genre.all
   end
-  
+
   def create
     @item = Item.new(item_params)
-    @item.save!
+    @item.save
     redirect_to admin_items_path
   end
 
@@ -21,12 +21,12 @@ class Admin::ItemsController < ApplicationController
 
   def edit
   end
-  
-  
+
+
    private
 
   def item_params
-    params.require(:item).permit(:name,:introduction,:price,:is_active,:image)
+    params.require(:item).permit(:name,:introduction,:price,:is_active,:image,:genre_id)
   end
-  
+
 end
