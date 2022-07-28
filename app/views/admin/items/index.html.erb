@@ -22,7 +22,7 @@
           <%= item.name %>
         </td>
         <td>
-          <%= item.price %>
+          <%= "#{item.price.to_s(:delimited, delimiter: ',' )}" %>
         </td>
         <td>
           <%= item.genre.name %>
