@@ -1,0 +1,43 @@
+<label>商品詳細</label>
+
+<div>
+  <%= image_tag @item.get_image(500,500) %>
+</div>
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td>商品名</td>
+        <td>
+          <%= @item.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>商品説明</td>
+        <td>
+            <%= @item.introduction %>
+        </td>
+      </tr>
+      <tr>
+        <td>ジャンル</td>
+        <td>
+          <%= @item.genre.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>税込価格<br>（税抜価格）</td>
+        <td>
+          <%= ApplicationHelper.tax_price(@item.price) %>
+          <span>(</span><%= ApplicationHelper.digit_price(@item.price) %><span>)円</span>
+        </td>
+      </tr>
+      <tr>
+        <td>販売ステータス</td>
+        <td>
+          <%= ApplicationHelper.sale_or_stop(@item.is_active) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%= link_to '編集する',edit_admin_item_path %>
