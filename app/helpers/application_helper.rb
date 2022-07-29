@@ -12,7 +12,9 @@ module ApplicationHelper
         "#{tax.to_s(:delimited, delimiter: ',' )}"
       end
       
-      
+      def sale_or_stop(is_active)
+        "#{is_active ? '販売中' : '販売停止中'}"
+      end
 
     end
 

@@ -30,7 +30,7 @@
           <%= item.genre.name %>
         </td>
         <td>
-          <%= item.is_active ? '販売中' : '販売停止中' %>
+          <%= ApplicationHelper.sale_or_stop(item.is_active) %>
         </td>
       </tr>
   </tbody>
