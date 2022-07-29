@@ -1,0 +1,30 @@
+<label>会員一覧</label>
+
+<table>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td>
+          <%= customer.id %>
+        </td>
+        <td>
+          <%= link_to ApplicationHelper.full_name(customer.last_name,customer.first_name), admin_customer_path(customer.id) %>
+        </td>
+        <td>
+          <%= customer.email %>
+        </td>
+        <td>
+          <%= is_deleted ? '退会' : '有効' %>
+        </td>
+      </tr>
+  </tbody>
+    <% end %>
+</table>
