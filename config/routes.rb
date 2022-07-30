@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
     resources :genres
     resources :items
+    resources :customers
   end
 
   namespace :public do

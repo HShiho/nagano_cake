@@ -12,22 +12,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @customers.each do |customers| %>
+    <% @customers.each do |customer| %>
       <tr>
         <td>
-          <%= customers.id %>
+          <%= customer.id %>
         </td>
         <td>
-          <%= link_to customers.name, admin_item_path(item.id) %>
+          <%= link_to ApplicationHelper.full_name(customer.last_name , customer.first_name), admin_customer_path(customer.id) %>
         </td>
         <td>
-          <%= ApplicationHelper.digit_price(item.price) %>
+          <%= customer.email %>
         </td>
         <td>
-          <%= item.genre.name %>
-        </td>
-        <td>
-          <%= ApplicationHelper.sale_or_stop(item.is_active) %>
+          <%= customer.is_deleted ? '退会' : '有効' %>
         </td>
       </tr>
   </tbody>
