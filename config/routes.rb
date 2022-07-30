@@ -12,13 +12,14 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'homes#top'
+    resource :homes, only: :top, as: :root
 
     resources :genres
     resources :items
   end
-  
+
   namespace :public do
+    resource :homes, only: :top, as: :root
     root to: 'homes#top'
   end
 
