@@ -1,4 +1,5 @@
 <label>会員一覧</label>
+<br>
 
 <table>
   <thead>
@@ -16,13 +17,13 @@
           <%= customer.id %>
         </td>
         <td>
-          <%= link_to ApplicationHelper.full_name(customer.last_name,customer.first_name), admin_customer_path(customer.id) %>
+          <%= link_to ApplicationHelper.full_name(customer.last_name , customer.first_name), admin_customer_path(customer.id) %>
         </td>
         <td>
           <%= customer.email %>
         </td>
         <td>
-          <%= is_deleted ? '退会' : '有効' %>
+          <%= customer.is_deleted ? '退会' : '有効' %>
         </td>
       </tr>
   </tbody>
