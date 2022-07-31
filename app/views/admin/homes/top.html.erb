@@ -19,10 +19,10 @@
           <%= ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name) %>
         </td>
         <td>
-          <% order.id %>
+          <%= order.Order_item.sum(:amount) %>
         </td>
         <td>
-          <%= order.id %>
+          <%= order.order_status_i18n %>
         </td>
       </tr>
   </tbody>
