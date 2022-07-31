@@ -1,5 +1,4 @@
 <label>会員一覧</label>
-
 <br>
 
 <table>
@@ -24,7 +23,7 @@
           <%= customer.email %>
         </td>
         <td>
-          <%= customer.is_deleted ? '退会' : '有効' %>
+          <%= ApplicationHelper.withdrawal_or_valibity(customer.is_deleted) %>
         </td>
       </tr>
   </tbody>
