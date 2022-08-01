@@ -18,22 +18,63 @@
       <tr>
         <td>配送先</td>
         <td>
-          <%= @order.customer %>
+          <%= @order.Adderess.postal_code %>
+          <%= @order.Adderess.adderess %><br>
+          <%= @order.Adderess.name %>
         </td>
       </tr>
       <tr>
-        <td>税込価格<br>（税抜価格）</td>
+        <td>支払い方法</td>
         <td>
-          <%= ApplicationHelper.tax_price(@item.price) %>
-          <span>(</span><%= ApplicationHelper.digit_price(@item.price) %><span>)円</span>
+          <%= @order.payment_method_i18n %>
         </td>
       </tr>
       <tr>
-        <td>販売ステータス</td>
+        <td>注文ステータス</td>
         <td>
-          <%= ApplicationHelper.sale_or_stop(@item.is_active) %>
+          <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+            <%= f.select :order_status, Application_record.order_status_i18n.keys.map{ |k| [I18n.t("enum.application_record.order_status.#{k}", k]} %>
+            <%= f.submit '更新' %>
+          <% end %>
         </td>
       </tr>
     </tbody>
+  </table>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>制作ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_item.each do |order_item| %>
+        <tr>
+          <td>
+            <%= order_item.name) %>
+          </td>
+          <td>
+            <%= ApplicationHelper.tax_price(order_item.price) %>
+          </td>
+          <td>
+            <%= order_item.amount %>
+          </td>
+          <td>
+            <%= "#{ ApplicationHelper.tax_price(order_item.price).to_i * order_item.amount.to_i }" %>
+          </td>
+          <td>
+            <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+              <%= f.select :order_status, Application_record.order_status_i18n.keys.map{ |k| [I18n.t("enum.application_record.order_status.#{k}", k]} %>
+              <%= f.submit '更新' %>
+            <% end %>
+          </td>
+        </tr>
+    </tbody>
+      <% end %>
   </table>
 </div>
