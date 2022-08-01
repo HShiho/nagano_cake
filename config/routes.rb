@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     patch '/order_items/:id' => 'order_items#update'
     
     patch '/orders/:id' => 'orders#order'
+    get '/orders/:id/index' =>'orders#index'
     resources :orders,except: [:new, :create, :delete, :edit]
 
     root :to => 'homes#top'
