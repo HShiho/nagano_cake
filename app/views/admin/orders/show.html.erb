@@ -1,0 +1,80 @@
+<label>注文詳細履歴</label>
+<br>
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td>購入者</td>
+        <td>
+          <%= ApplicationHelper.full_name(@order.customer.last_name , @order.customer.first_name) %>
+        </td>
+      </tr>
+      <tr>
+        <td>注文日</td>
+        <td>
+            <%= @order.created_at %>
+        </td>
+      </tr>
+      <tr>
+        <td>配送先</td>
+        <td>
+          <%= @order.postal_code %>
+          <%= @order.address %><br>
+          <%= @order.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>支払い方法</td>
+        <td>
+          <%= @order.payment_method_i18n %>
+        </td>
+      </tr>
+      <tr>
+        <td>注文ステータス</td>
+        <td>
+          <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+            <%= f.select :order_status, ApplicationRecord.order_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.order_status.#{k}"),k]} %>
+            <%= f.submit '更新' %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>制作ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td>
+            <%= order_item.item.name %>
+          </td>
+          <td>
+            <%= ApplicationHelper.tax_price(order_item.price) %>
+          </td>
+          <td>
+            <%= order_item.amount %>
+          </td>
+          <td>
+            <%= "#{ ApplicationHelper.tax_price(order_item.price).to_i * order_item.amount.to_i }" %>
+          </td>
+          <td>
+            <%= form_with model: @order_item, url: "/admin/order_items/#{@order.id}", method: :patch do |f| %>
+              <%= f.select :manufacture_status, ApplicationRecord.manufacture_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.manufacture_status.#{k}"),k]} %>
+              <%= f.submit '更新' %>
+            <% end %>
+          </td>
+        </tr>
+    </tbody>
+      <% end %>
+  </table>
+</div>

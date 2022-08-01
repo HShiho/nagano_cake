@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   # 管理者用 URL/admin/sign_in...
   devise_for :admin, skip:[:registrations, :passwords],controllers:{
     sessions:"admin/sessions"
@@ -13,17 +12,21 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resource :homes, only: :top, as: :root
-
+    
+    patch '/order_items/:id' => 'order_items#update'
+    patch '/orders/:id' => 'orders#order'
+    get '/orders/:id/index' =>'orders#index'
     resources :genres
     resources :items
     resources :customers,except: [:new, :create]
+    resources :orders,except: [:new, :create, :delete, :edit]
+
+    root :to => 'homes#top'
 
   end
 
   namespace :public do
     resource :homes, only: :top, as: :root
-    root to: 'homes#top'
 
   end
 
