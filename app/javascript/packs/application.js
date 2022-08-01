@@ -16,6 +16,7 @@
 // ActiveStorage.start()
 
 
+
 //// 以下、新しく記述
 
 require("@rails/ujs").start()
