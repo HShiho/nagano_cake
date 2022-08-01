@@ -12,15 +12,13 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-
+    
+    patch '/order_items/:id' => 'order_items#update'
+    patch '/orders/:id' => 'orders#order'
+    get '/orders/:id/index' =>'orders#index'
     resources :genres
     resources :items
     resources :customers,except: [:new, :create]
-    
-    patch '/order_items/:id' => 'order_items#update'
-    
-    patch '/orders/:id' => 'orders#order'
-    get '/orders/:id/index' =>'orders#index'
     resources :orders,except: [:new, :create, :delete, :edit]
 
     root :to => 'homes#top'
