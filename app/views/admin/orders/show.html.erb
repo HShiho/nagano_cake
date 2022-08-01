@@ -18,9 +18,9 @@
       <tr>
         <td>配送先</td>
         <td>
-          <%= @order.Adderess.postal_code %>
-          <%= @order.Adderess.adderess %><br>
-          <%= @order.Adderess.name %>
+          <%= @order.postal_code %>
+          <%= @order.address %><br>
+          <%= @order.name %>
         </td>
       </tr>
       <tr>
@@ -33,7 +33,7 @@
         <td>注文ステータス</td>
         <td>
           <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-            <%= f.select :order_status, Application_record.order_status_i18n.keys.map{ |k| [I18n.t("enum.application_record.order_status.#{k}", k]} %>
+            <%= f.select :order_status, ApplicationRecord.order_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.order_status.#{k}"),k]} %>
             <%= f.submit '更新' %>
           <% end %>
         </td>
@@ -53,10 +53,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @order.order_item.each do |order_item| %>
+      <% @order.order_items.each do |order_item| %>
         <tr>
           <td>
-            <%= order_item.name) %>
+            <%= order_item.item.name %>
           </td>
           <td>
             <%= ApplicationHelper.tax_price(order_item.price) %>
@@ -68,8 +68,8 @@
             <%= "#{ ApplicationHelper.tax_price(order_item.price).to_i * order_item.amount.to_i }" %>
           </td>
           <td>
-            <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-              <%= f.select :order_status, Application_record.order_status_i18n.keys.map{ |k| [I18n.t("enum.application_record.order_status.#{k}", k]} %>
+            <%= form_with model: @order_item, url: "/admin/order_items/#{@order.id}", method: :patch do |f| %>
+              <%= f.select :manufacture_status, ApplicationRecord.manufacture_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.manufacture_status.#{k}"),k]} %>
               <%= f.submit '更新' %>
             <% end %>
           </td>

@@ -13,13 +13,13 @@
     <% @orders.each do |order| %>
       <tr>
         <td>
-          <%= order.created_at %>
+          <%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'),admin_order_path(order.id) %>
         </td>
         <td>
-          <%= link_to ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name),admin_order_path(order.id) %>
+          <%= ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name) %>
         </td>
         <td>
-          <%= order.sum(:amount) %>
+          <%= order.order_items.sum(:amount) %>
         </td>
         <td>
           <%= order.order_status_i18n %>
