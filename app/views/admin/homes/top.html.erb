@@ -13,10 +13,10 @@
     <% @orders.each do |order| %>
       <tr>
         <td>
-          <%= link_to order.created_at,admin_order_path(order.id) %>
+          <%= order.created_at %>
         </td>
         <td>
-          <%= ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name) %>
+          <%= link_to ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name),admin_order_path(order.id) %>
         </td>
         <td>
           <%= order.Order_item.sum(:amount) %>
