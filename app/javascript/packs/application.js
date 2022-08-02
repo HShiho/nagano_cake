@@ -15,11 +15,16 @@
 // Turbolinks.start()
 // ActiveStorage.start()
 
-// Add
-import "jquery/dist/jquery.js"
-import "popper.js/dist/popper.js"
-import "bootstrap/dist/js/bootstrap"
-import "bootstrap/dist/css/bootstrap.css"
+// import "jquery/dist/jquery.js"
+// import "popper.js/dist/popper.js"
+// import "bootstrap/dist/js/bootstrap"
+// import "bootstrap/dist/css/bootstrap.css"
+// import "../stylesheets/application"
+// import '@fortawesome/fontawesome-free/js/all'
+
+import "jquery";
+import "popper.js";
+import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 
