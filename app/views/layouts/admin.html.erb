@@ -14,9 +14,9 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
+    <header class="border-bottom pb-2">
       <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light pt-4 pb-3 pr-0">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -24,19 +24,19 @@
                 <ul class="navbar-nav ml-auto">
                   <% if admin_signed_in? %>
                     <li class="nav-item mx-3">
-                      <%= link_to '商品一覧',admin_items_path, class: 'nav-link text-dark border rounded border-secondary'  %>
+                      <%= link_to '商品一覧',admin_items_path, class: 'nav-link text-dark border rounded' %>
                     </li>
                     <li class="nav-item mx-3">
-                      <%= link_to '会員一覧',admin_customers_path, class: 'nav-link text-dark border rounded border-secondary'  %>
+                      <%= link_to '会員一覧',admin_customers_path, class: 'nav-link text-dark border rounded' %>
                     </li>
                     <li class="nav-item mx-3">
-                      <%= link_to '注文履歴一覧',admin_root_path, class: 'nav-link text-dark border rounded border-secondary'  %>
+                      <%= link_to '注文履歴一覧',admin_root_path, class: 'nav-link text-dark border rounded' %>
                     </li>
                     <li class="nav-item mx-3">
-                      <%= link_to 'ジャンル一覧',admin_genres_path, class: 'nav-link text-dark border rounded border-secondary'  %>
+                      <%= link_to 'ジャンル一覧',admin_genres_path, class: 'nav-link text-dark border rounded' %>
                     </li>
-                    <li class="nav-item mx-3">
-                      <%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border rounded border-secondary'  %>
+                    <li class="nav-item ml-3 mr-0">
+                      <%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border rounded'%>
                     </li>
                   <% else %>
                     <li class="nav-item">About</li>
@@ -48,12 +48,17 @@
             </div>
           </nav>
           <div class="row">
-          <h3>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cake-slice"></i></h3>
+          <h2>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cookie-bite"></i></h2>
           <!--検索窓-->
-            <div class="input-group col-sm-4 ml-auto">
-              <input type="text" class="form-control" placeholder="Search">
-                <button class="btn btn-default" type="button"><i class="fas seach"></i></button>
+            <div class="input-group col-4 ml-auto">
+              <input type="text" class="form-control " placeholder="Search">
+              <span class="input-group-btn">
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </span>
             </div>
+            <!------->
           </div>
       </div>
     </header>
@@ -62,7 +67,7 @@
       <%= yield %>
     </mian>
 
-    <footer class="pt-5 pb-4">
+    <footer class="pt-5 pb-4 border-top">
 
     </footer>
 
