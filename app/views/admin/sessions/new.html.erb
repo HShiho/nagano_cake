@@ -1,19 +1,37 @@
-<h2>管理者ログイン</h2>
+<div class="container px-5 px-sm-0 pt-4">
 
-<%= form_with model: @admin, url: admin_session_path do |f| %>
-  <div class="field">
-    <span>メールアドレス</span>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="col-md-12 row">
+    <label class="h4 px-4 bg-light">管理者ログイン</label>
   </div>
 
-  <div class="field">
-    <span>パスワード</span>
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="pt-4 col-12">
+    <%= form_with model: @admin, url: admin_session_path do |f| %>
+      <div class="form-group">
+        <div class="field row">
+          <div></div>
+          <div class="col-3">メールアドレス</div>
+          <div class="col-9">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@exsample.com", class: "col-10" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="field row">
+          <div></div>
+          <div class="col-3">パスワード</div>
+          <div class="col-9">
+            <%= f.password_field :password, autocomplete: "current-password", class: "col-10 pl-1" %>
+          </div>
+        </div>
+      </div>
+      <div class="btn-toolbar">
+        <div class="btn actions btn-group mx-auto">
+            <%= f.submit "ログイン", class: 'btn btn-primary rounded-pill py-2 px-5' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
 
 <%= render "admin/shared/links" %>
+
+</div>
