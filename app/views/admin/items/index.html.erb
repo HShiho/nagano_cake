@@ -31,7 +31,7 @@
                 <%= item.id %>
               </td>
               <td>
-                <%= link_to item.name, admin_item_path(item.id) %>
+                <u><%= link_to item.name, admin_item_path(item.id), class: 'text-dark' %></u>
               </td>
               <td>
                 <%= ApplicationHelper.digit_price(item.price) %>
@@ -40,7 +40,7 @@
                 <%= item.genre.name %>
               </td>
               <td>
-                <%= ApplicationHelper.sale_or_stop(item.is_active) %>
+                <b><%= ApplicationHelper.sale_or_stop(item.is_active) %></b>
               </td>
             </tr>
         </tbody>
