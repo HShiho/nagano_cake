@@ -45,7 +45,9 @@
         </tr>
         <tr>
           <td>会員ステータス</td>
-          <td><%= ApplicationHelper.withdrawal_or_valibity(@customer.is_deleted) %></td>
+          <td>
+            <b><%= ApplicationHelper.withdrawal_or_valibity(@customer.is_deleted) %></b>
+          </td>
         </tr>
         <tr>
           <td></td>

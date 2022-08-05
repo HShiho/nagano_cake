@@ -37,7 +37,9 @@
           </tr>
           <tr>
             <td>販売ステータス</td>
-            <td><%= ApplicationHelper.sale_or_stop(@item.is_active) %></td>
+            <td>
+              <b><%= ApplicationHelper.sale_or_stop(@item.is_active) %></b>
+            </td>
           </tr>
          </tbody>
       </table>
