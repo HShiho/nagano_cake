@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    
+
     patch '/order_items/:id' => 'order_items#update'
     patch '/orders/:id' => 'orders#order'
     get '/orders/:id/index' =>'orders#index',as: 'order_index'
@@ -26,7 +26,12 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    resource :homes, only: :top, as: :root
+
+    get '/about' => 'homes#about',as: 'about'
+    resources :customers,except: [:new, :index, :delete]
+    resources :cart_items,except: [:new, :show, :edit]
+    resources :items,except: [:new, :create, :delete, :edit]
+    root :to => 'homes#top'
 
   end
 

@@ -39,10 +39,18 @@
                       <%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border rounded'%>
                     </li>
                   <% else %>
-                    <li class="nav-item">About</li>
-                    <li class="nav-item">商品一覧</li>
-                    <li class="nav-item">新規登録</li>
-                    <li class="nav-item">ログイン</li>
+                    <li class="nav-item mx-3">
+                      <%= link_to 'About',public_about_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '商品一覧',public_items_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '新規登録',new_customer_registration_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to 'ログイン',new_customer_session_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
                   <% end %>
                 </ul>
             </div>
