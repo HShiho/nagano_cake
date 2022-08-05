@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     
     patch '/order_items/:id' => 'order_items#update'
     patch '/orders/:id' => 'orders#order'
-    get '/orders/:id/index' =>'orders#index'
+    get '/orders/:id/index' =>'orders#index',as: 'order_index'
     resources :genres
     resources :items
     resources :customers,except: [:new, :create]

@@ -1,43 +1,52 @@
-<label>商品詳細</label>
+<div class="container px-5 px-sm-0 pt-4">
 
-<div>
-  <%= image_tag @item.get_image(500,500) %>
-</div>
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td>商品名</td>
-        <td>
-          <%= @item.name %>
-        </td>
-      </tr>
-      <tr>
-        <td>商品説明</td>
-        <td>
-            <%= @item.introduction %>
-        </td>
-      </tr>
-      <tr>
-        <td>ジャンル</td>
-        <td>
-          <%= @item.genre.name %>
-        </td>
-      </tr>
-      <tr>
-        <td>税込価格<br>（税抜価格）</td>
-        <td>
-          <%= ApplicationHelper.tax_price(@item.price) %>
-          <span>(</span><%= ApplicationHelper.digit_price(@item.price) %><span>)円</span>
-        </td>
-      </tr>
-      <tr>
-        <td>販売ステータス</td>
-        <td>
-          <%= ApplicationHelper.sale_or_stop(@item.is_active) %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<%= link_to '編集する',edit_admin_item_path %>
+  <div class="col-md-12">
+    <label class="h4 px-4 bg-light">商品詳細</label>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-3">
+      <%= image_tag @item.get_image(300,400) %>
+    </div>
+    <div class="mx-auto col-8">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td class="col-3">商品名</td>
+            <td><%= @item.name %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+            <td class="col-6"> <%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td>
+             <%= @item.genre.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>税込価格<br>（税抜価格）</td>
+            <td>
+              <div class="h4 d-flex align-items-center" style="height:36px;">
+                <%= ApplicationHelper.tax_price(@item.price) %>
+                <span>(</span><%= ApplicationHelper.digit_price(@item.price) %><span>)円</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>販売ステータス</td>
+            <td>
+              <b><%= ApplicationHelper.sale_or_stop(@item.is_active) %></b>
+            </td>
+          </tr>
+         </tbody>
+      </table>
+    </div>
+        <div class="d-grid gap-2 col-3 mx-auto my-4">
+          <%= link_to '編集する',edit_admin_item_path, class: 'btn btn-success rounded-pill py-3 px-5' %>
+        </div>
+   </div>
+
+  </div>

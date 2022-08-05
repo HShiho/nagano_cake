@@ -1,58 +1,71 @@
-<label>注文詳細履歴</label>
-<br>
-<div>
-  <table>
-    <tbody>
-      <tr>
-        <td>購入者</td>
-        <td>
-          <%= ApplicationHelper.full_name(@order.customer.last_name , @order.customer.first_name) %>
-        </td>
-      </tr>
-      <tr>
-        <td>注文日</td>
-        <td>
-            <%= @order.created_at %>
-        </td>
-      </tr>
-      <tr>
-        <td>配送先</td>
-        <td>
-          <%= @order.postal_code %>
+<div class="container px-5 px-sm-0 pt-4">
+
+  <div class="col-12 row">
+    <label class="h4 px-4 bg-light">注文詳細履歴</label>
+  </div>
+
+  <div class="pt-4 h5">
+    <div class="row my-3">
+      <div class="col-3">
+        <b>購入者</b>
+      </div>
+        <div>
+          <u>
+            <%= link_to ApplicationHelper.full_name(@order.customer.last_name , @order.customer.first_name),admin_customer_path(@order.customer.id), class: 'text-dark' %>
+          </u>
+        </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-3">
+        <b>注文日</b>
+      </div>
+        <div>
+            <%= @order.created_at.strftime('%Y/%m/%d') %>
+        </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-3">
+        <b>配送先</b>
+      </div>
+        <div>
+          〒<%= @order.postal_code %>
           <%= @order.address %><br>
           <%= @order.name %>
-        </td>
-      </tr>
-      <tr>
-        <td>支払い方法</td>
-        <td>
+        </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-3">
+        <b>支払い方法</b>
+      </div>
+        <div>
           <%= @order.payment_method_i18n %>
-        </td>
-      </tr>
-      <tr>
-        <td>注文ステータス</td>
-        <td>
+        </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-3 pt-2">
+        <b>注文ステータス</b>
+      </div>
+        <div class="col-8 pl-0">
           <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-            <%= f.select :order_status, ApplicationRecord.order_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.order_status.#{k}"),k]} %>
-            <%= f.submit '更新' %>
+            <%= f.select :order_status, ApplicationRecord.order_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.order_status.#{k}"),k]},{ prompt: false },class: 'col-3 ' %>
+            <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
           <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-        <th>制作ステータス</th>
-      </tr>
-    </thead>
-    <tbody>
+        </div>
+    </div>
+  </div>
+
+  <div class="pt-4 row ">
+    <table class="table table-hover table-inverse col-9">
+      <thead class="bg-light">
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
       <% @order.order_items.each do |order_item| %>
         <tr>
           <td>
@@ -67,14 +80,43 @@
           <td>
             <%= "#{ ApplicationHelper.tax_price(order_item.price).to_i * order_item.amount.to_i }" %>
           </td>
-          <td>
+          <td class="pt-1">
+            <div class="form-group h5">
             <%= form_with model: @order_item, url: "/admin/order_items/#{@order.id}", method: :patch do |f| %>
-              <%= f.select :manufacture_status, ApplicationRecord.manufacture_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.manufacture_status.#{k}"),k]} %>
-              <%= f.submit '更新' %>
+              <%= f.select :manufacture_status, ApplicationRecord.manufacture_statuses_i18n.keys.map{|k| [I18n.t("enums.application_record.manufacture_status.#{k}"),k]},{ prompt: false },class: 'col-6' %>
+              <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
             <% end %>
+            </div
           </td>
         </tr>
-    </tbody>
-      <% end %>
-  </table>
+      </tbody>
+    </table>
+    <table class="table table-borderless col-3">
+      <tbody>
+        <tr>
+          <td>
+            <b>商品合計</b>
+          </td>
+ <!--商品合計が正しく表示されるように調べて修正-->
+          <td><%= "#{ApplicationHelper.tax_price(order_item.price).to_i * order_item.amount.to_i}" %>円</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>
+            <b>送料</b>
+          </td>
+          <td><%= @order.postage %>円</td>
+        </tr>
+        <tr>
+          <td>
+            <b>請求金額合計</b>
+          </td>
+          <td>
+            <b><%= @order.billing_amount %>円</b>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
