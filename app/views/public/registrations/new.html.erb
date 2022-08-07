@@ -43,7 +43,7 @@
          <tr>
           <td>パスワード
             <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> 文字以上)</em>
+              <em>(<%= @minimum_password_length %>文字以上)</em>
             <% end %>
           </td>
           <td><span class="text-white">（　）　</span>
@@ -66,9 +66,9 @@
     </tbody>
   </table>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 mb-5">
   <label class="h4 px-4 bg-light">既に登録済みの方</label>
-  <div class="pl-4 pt-2 pb-4 row">
+  <div class="col-5 pl-5 pt-2 pb-5 ml-5 row">
     <div>
       <u><%= link_to "こちら",new_customer_session_path %></u>
     </div>
