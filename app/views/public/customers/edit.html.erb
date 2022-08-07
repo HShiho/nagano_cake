@@ -1,2 +1,57 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container px-5 px-sm-0 pt-4 pb-5">
+
+  <div class="pl-5 ml-5">
+    <label class="h4 px-4 bg-light">会員情報編集</label>
+  </div>
+
+  <div>
+    <%= form_with model: @customer, url: public_customer_path, method: :patch do |f| %>
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td class="col-2">名前</td>
+          <td><%= f.text_field :last_name,placeholder:"令和",class: "col-4 px-1" %>
+          　　<%= f.text_field :first_name,placeholder:"道子",class: "col-4 px-1 ml-1" %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%= f.text_field :last_name_kana,placeholder:"レイワ",class: "col-4 px-1" %>
+          　   <%= f.text_field :first_name_kana,placeholder:"ミチコ",class: "col-4 px-1 ml-1" %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td>
+            <%= f.text_field :postal_code,placeholder:"0000000",class: "col-4 px-1" %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td class="col-8">
+            <%= f.text_area :address,placeholder:"東京都渋谷区代々木神園町0-0",class: "col-10 px-1",rows: "1" %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td>
+            <%= f.text_field :telephone_number,placeholder:"00000000000",class: "col-4 px-1" %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"sample@exanple.com",class: "col-4 px-1" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="row pl-3">
+              <div>
+                <%= f.submit "編集内容を保存",class: 'btn btn-success btn-font-size-lg px-5' %>
+              </div>
+              <div class="col-4 ml-auto">
+                <%= link_to "退会する",public_withdrawal_path,class: 'btn btn-danger btn-font-size-lg px-3' %>
+              </div>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  </div>
