@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :customers,except: [:new, :index, :delete]
     resources :cart_items,except: [:new, :show, :edit]
     resources :items,except: [:new, :create, :delete, :edit]
+    resources :addresses,except: [:new, :show]
+    resources :orders,except: [:update, :delete, :edit]
     root :to => 'homes#top'
 
   end

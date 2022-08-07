@@ -24,7 +24,7 @@
               <ul class="navbar-nav ml-auto">
                 <% if customer_signed_in? %>
                   <li class="nav-item mx-3">
-                    <%= link_to 'マイページ',public_customer_path(Customer.id), class: 'nav-link text-dark border rounded' %>
+                    <%= link_to 'マイページ',public_customer_path(@current_customer.id), class: 'nav-link text-dark border rounded' %>
                   </li>
                   <li class="nav-item mx-3">
                     <%= link_to '商品一覧',public_items_path, class: 'nav-link text-dark border rounded' %>
@@ -53,7 +53,15 @@
             </div>
         </nav>
         <div class="row">
-          <h2>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cookie-bite"></i></h2>
+          <div class="row col-9">
+            <h2>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cookie-bite"></i></h2>
+            <div class="row mx-auto text-center text-nowrap">
+              <% if customer_signed_in? %>
+                <label>ようこそ、</label>
+                <label><%= @current_customer.last_name %>さん！</label>
+              <% end %>
+            </div>
+          </div>
           <!--検索窓-->
           <form class="col-3 py-0 px-0 mr-3 ml-auto">
             <div class="input-group ">
