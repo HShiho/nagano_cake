@@ -3,8 +3,10 @@ class Public::CustomersController < ApplicationController
 
   def show
     @current_customer = current_customer
+    @customer = Customer.find(params[:id])
   end
 
   def edit
+    @current_customer = current_customer
   end
 end
