@@ -21,6 +21,14 @@ class Public::CustomersController < ApplicationController
     @current_customer = current_customer
   end
 
+  def breakaway
+    @current_customer = current_customer
+    @current_customer.update(is_deleted: true)
+    reset_session
+    redirect_to public_root_path
+
+  end
+
 
 
    private
