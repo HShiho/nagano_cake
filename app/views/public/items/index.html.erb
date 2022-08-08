@@ -1,2 +1,26 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div class="container px-sm-0 pt-4 row">
+  <%= render partial: 'layouts/genre_search',locals: { genres: @genres } %>
+
+  <div class="col-9 mt-3 mx-auto">
+    <div class="row">
+      <h2 class="py-4">
+        <% if @genre.present? %>
+          <b><%= @genre.name %>一覧</b>
+        <% else %>
+          <b>商品一覧</b>
+        <% end %>
+      </h2>
+      <p class="h5 py-4 d-flex align-items-end">（全<%= @items.each.count %>件）</p>
+    </div>
+    <div class="row">
+      <% @items.each do |item| %>
+        <div class="col-3">
+          <div><%= image_tag item.get_image(200,200) %></div>
+          <div><b><%= item.name %></b></div>
+          <div><b>¥<%= ApplicationHelper.tax_price(item.price) %></b></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
