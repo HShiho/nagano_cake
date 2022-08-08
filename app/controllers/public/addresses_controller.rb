@@ -18,6 +18,12 @@ class Public::AddressesController < ApplicationController
     @current_customer = current_customer
     @address = Address.find(params[:id])
   end
+  
+  def update
+    @address = Address.find(params[:id])
+    @address.update(address_params)
+    redirect_to public_addresses_path
+  end
 
   def destroy
     @address = Address.find(params[:id])
