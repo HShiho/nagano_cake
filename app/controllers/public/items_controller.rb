@@ -7,15 +7,19 @@ class Public::ItemsController < ApplicationController
 
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.items.order("created_at DESC").all
+      @item = @genre.items.order("created_at DESC").all
+      @items = @item.where.not(is_active: false)
     else
-      @items = Item.order("created_at DESC").all
+      @item = Item.order("created_at DESC").all
+      @items = @item.where.not(is_active: false)
     end
 
   end
 
   def show
     @current_customer = current_customer
+    @genres = Genre.all
+    @item = Item.find(params[:id])
   end
 
 end

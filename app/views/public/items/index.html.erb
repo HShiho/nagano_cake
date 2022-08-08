@@ -1,4 +1,4 @@
-<div class="container px-sm-0 pt-4 row">
+<div class="container col-12 px-sm-0 pt-4 row">
   <%= render partial: 'layouts/genre_search',locals: { genres: @genres } %>
 
   <div class="col-8 mt-3 mx-auto">
@@ -14,11 +14,13 @@
     </div>
     <div class="row">
       <% @items.each do |item| %>
-        <div class="col-3">
-          <div><%= image_tag item.get_image(200,200) %></div>
-          <div><b><%= item.name %></b></div>
-          <div><b>¥<%= ApplicationHelper.tax_price(item.price) %></b></div>
-        </div>
+          <div class="col-3">
+            <%= link_to public_item_path(item.id) do %>
+              <div><%= image_tag item.get_image(200,200) %></div>
+            <% end %>
+            <div><b><%= item.name %></b></div>
+            <div><b>¥<%= ApplicationHelper.tax_price(item.price) %></b></div>
+          </div>
       <% end %>
     </div>
   </div>
