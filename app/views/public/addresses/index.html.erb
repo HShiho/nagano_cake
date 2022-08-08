@@ -1,2 +1,88 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<div class="container px-5 px-sm-0 pt-4 pb-5">
+
+  <div class="pl-5 ml-5">
+    <label class="h4 px-4 bg-light">配送先登録 / 一覧</label>
+  </div>
+
+  <%= form_with model: @address, url: public_addresses_path do |f| %>
+  <div class="py-4">
+    <div class="row">
+      <div class="col-3 px-1 py-1">
+        郵便番号（ハイフンなし）
+      </div>
+      <div class="row col-9">
+        <div class="col-8 px-1 py-1">
+          <%= f.number_field :postal_code, placeholder:"0000000", class: "col-5 px-1" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 px-1 py-1">
+        住所
+      </div>
+      <div class="col-9 px-1 py-1">
+        <%= f.text_area :address, placeholder:"東京都渋谷区代々木神園町0-0", rows: "1", class: "col-8 px-1" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 px-1 py-0">
+        宛名
+      </div>
+      <div class="row col-9">
+        <div class="col-8 px-1 py-0">
+          <%= f.text_field :name, placeholder:"令和道子", class: "col-5 px-1" %>
+        </div>
+        <div class="ml-3">
+          <%= f.submit "新規登録",class: 'btn btn-success btn-font-size-lg px-3' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="py-2 mt-5">
+    <div class="row">
+      <div class="col-1 border border-dark bg-light px-1 py-3">
+        郵便番号
+      </div>
+      <div class="col-4 border border-dark bg-light px-1 py-3">
+        住所
+      </div>
+      <div class="col-2 border border-dark bg-light px-1 py-3">
+        宛名
+      </div>
+      <div class="col-4 border border-dark bg-light px-1 py-3">
+      </div>
+    </div>
+    <% @addresses.each do |address| %>
+    <div class="row">
+      <div class="col-1 border border-dark px-1 py-2 d-flex align-items-center">
+        <div>
+          <%= address.postal_code %>
+        </div>
+      </div>
+      <div class="col-4 border border-dark px-1 py-2 d-flex align-items-center">
+        <div>
+          <%= address.address %>
+        </div>
+      </div>
+      <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
+        <div>
+          <%= address.name %>
+        </div>
+      </div>
+      <div class="col-4 border border-dark px-1 py-2">
+        <div class="row col-11 px-0 mx-auto">
+          <div class="col-5">
+            <%= link_to "編集する",edit_public_address_path(address.id),class: 'btn btn-success btn-font-size-lg' %>
+          </div>
+          <div class="col-5">
+            <%= link_to "削除する",public_address_path(address.id), method: :delete, data: { cofirm: '本当に消しますか?' }, class: 'btn btn-danger btn-font-size-lg' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  </div>

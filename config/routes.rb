@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   namespace :public do
 
     get '/about' => 'homes#about',as: 'about'
+    get '/customers/withdrawal' => 'customers#withdrawal',as: 'withdrawal'
+    patch '/customers/withdrawal' => 'customers#breakaway',as: 'breakaway'
     resources :customers,except: [:new, :index, :delete]
     resources :cart_items,except: [:new, :show, :edit]
     resources :items,except: [:new, :create, :delete, :edit]
