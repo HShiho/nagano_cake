@@ -1,9 +1,9 @@
 <div class="container px-sm-0 pt-4 row">
   <%= render partial: 'layouts/genre_search',locals: { genres: @genres } %>
 
-  <div class="col-9 mt-3 mx-auto">
+  <div class="col-8 mt-3 mx-auto">
     <div class="row">
-      <h2 class="py-4">
+      <h2 class="py-2">
         <% if @genre.present? %>
           <b><%= @genre.name %>一覧</b>
         <% else %>

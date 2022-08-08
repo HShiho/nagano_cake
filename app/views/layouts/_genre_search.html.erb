@@ -5,7 +5,7 @@
     <div class="py-3 px-4">
       <% @genres.each do |genre| %>
         <div class="py-1">
-          <%= link_to genre.name,public_items_path(genre_id: genre.id) %></div>
+          <%= link_to genre.name,public_items_path(genre_id: genre.id), class: "text-dark" %></div>
       <% end %>
     </div>
 </div>
