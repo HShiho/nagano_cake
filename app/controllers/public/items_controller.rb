@@ -4,7 +4,6 @@ class Public::ItemsController < ApplicationController
   def index
     @current_customer = current_customer
     @genres = Genre.all
-
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @item = @genre.items.order("created_at DESC").all
@@ -13,7 +12,6 @@ class Public::ItemsController < ApplicationController
       @item = Item.order("created_at DESC").all
       @items = @item.where.not(is_active: false)
     end
-
   end
 
   def show
