@@ -12,31 +12,32 @@
         <b class="h3">¥ <%= ApplicationHelper.tax_price(@item.price) %></b>
         <span>(税込)</span>
       </div>
-      <div class="ml-1 mt-5 h5 row">
-        <form>
-        <%= form_with model: @cart_item, url: public_cart_items_path, method: :post do |f| %>
-          <div class="form-group mr-5">
-            <%= f.select :amount, class: "form-control" do %>
-              <option selected="selected" class="text-light">個数選択　　</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            <% end %>
-          </div>
-        </form>
+      <%= form_with(model: @crat_item, url: public_cart_items_path, method: :post,local: true)do |f| %>
+        <div class="ml-1 mt-5 h5 row">
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.hidden_field :customer_id, :value => @current_customer.id %>
+          <form>
+            <div class="form-group mr-5">
+              <%= f.select :amount, class: "form-control" do %>
+                <option selected="selected" class="text-light">個数選択　　</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              <% end %>
+            </div>
+          </form>
           <div class="ml-0">
-            <%= f.hidden_field :item_id, :value => @item.id %>
             <%= f.submit "カートに入れる", class: 'btn btn-success px-3' %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 

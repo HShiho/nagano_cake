@@ -43,9 +43,10 @@
           </div>
           <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
             <div>
-              <%= form_with model: cart_item, url: pcblic_cart_item_path(cart_item), method: :patch do |f| %>
-                <%= f.number_field :amount, min: 1, max: 10 %>
+              <%= form_with model: cart_item, url: public_cart_item_path(cart_item), method: :patch do |f| %>
+                <%= f.number_field :amount ,class: "col-5"%>
                 <%= f.submit "変更", class: 'btn btn-success' %>
+              <% end %>
             </div>
           </div>
           <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
@@ -57,7 +58,7 @@
           </div>
           <div class="col-2 border border-dark px-1 py-2">
             <div class="row col-11 px-0 mx-auto">
-              <div class="col-5">
+              <div class="col-8">
                 <%= link_to "削除",public_cart_item_path(cart_item.id,cart_item), method: :delete, data: { cofirm: '本当に消しますか?' }, class: 'btn btn-danger' %>
               </div>
             </div>
@@ -67,16 +68,16 @@
     <% end %>
   </div>
 
-  <div class="mt-4">
+ <div class="mt-4">
     <div class="col-12 row">
       <div class="col-3">
         <%= link_to "買い物を続ける",public_items_path,class: 'btn btn-primary' %>
       </div>
-      <div class="row col-4 ml-auto">
-        <div class="col-2 border border-dark bg-light px-1 py-3">
+      <div class="row col-8 ml-auto">
+        <div class="col-4 border border-dark bg-light px-1 py-3">
           合計金額
         </div>
-        <div class="bol-2 border border-dark px-1 py-3">
+        <div class="col-4 border border-dark px-1 py-3">
           <%= total %>
         </div>
       </div>
@@ -88,5 +89,4 @@
     </div>
   </div>
 
-
- </div>
+</div>

@@ -18,6 +18,7 @@ class Public::ItemsController < ApplicationController
     @current_customer = current_customer
     @genres = Genre.all
     @item = Item.find(params[:id])
+    @cart_item = CartItem
   end
 
 end
