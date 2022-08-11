@@ -1,10 +1,12 @@
 <div class="container px-5 px-sm-0 pt-4 pb-5">
 
+  <% total = 0 %>
+  <% if current_customer.cart_items.present? %>
+
   <div class="pl-5 ml-5">
     <label class="h4 px-4 bg-light">ショッピングカート</label>
     <div class="col-3 ml-auto">
-      カートを空にする
-      <!--link_to "カートを空にする",public_cart_items_path,method: :delete, data: { cofirm: '本当に消しますか?' }class: 'btn btn-danger'-->
+      <%= link_to "カートを空にする",public_cart_items_path, method: :delete, data: { cofirm: '本当に消しますか?' }, class: 'btn btn-danger' %>
     </div>
   </div>
 
@@ -26,79 +28,84 @@
       </div>
     </div>
 
-    <% total = 0 %>
-    <% if current_customer.cart_items.present? %>
-      <% @cart_items.each do |cart_item| %>
-        <div class="row">
-          <div class="col-4 border border-dark px-1 py-2 d-flex align-items-center">
-            <div>
-              <%= image_tag cart_item.item.get_image(50,60), class: "mx-3 mt-3" %>
-              <%= cart_item.item.name %>
-            </div>
-          </div>
-          <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
-            <div>
-              <%= ApplicationHelper.tax_price(cart_item.item.price) %>
-            </div>
-          </div>
-          <%= form_with model: cart_item, url: public_cart_item_path(cart_item),local: true, method: :patch, class: "col-2 border border-dark d-flex align-items-center px-1 py-2" do |f| %>
-          <div class="col-12  row d-flex align-items-center mx-auto">
-                  <div class="form-group h5 pt-3 mx-auto">
-                    <%= f.select :amount, class: "form-control" do %>
-                      <option selected="selected" class="text-light"><%= cart_item.amount %></option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    <% end %>
-                  </div>
-                <div class="mx-auto">
-                  <%= f.submit "変更", class: 'btn btn-success' %>
-                </div>
-          </div>
-          <% end %>
-          <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
-            <div>
-              <% subtotal = ((cart_item.item.price*cart_item.amount)*1.1).to_i %>
-                <%= subtotal.to_s(:delimited, delimiter: ',' ) %>
-                  <% total += subtotal %>
-            </div>
-          </div>
-          <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
-            <div class="col-10 mx-auto">
-              <%= link_to "削除する",public_cart_item_path(cart_item.id,cart_item), method: :delete, data: { cofirm: '本当に消しますか?' }, class: 'btn btn-danger' %>
-            </div>
+    <% @cart_items.each do |cart_item| %>
+      <div class="row">
+        <div class="col-4 border border-dark px-1 py-2 d-flex align-items-center">
+          <div>
+            <%= image_tag cart_item.item.get_image(50,60), class: "mx-3 mt-3" %>
+            <%= cart_item.item.name %>
           </div>
         </div>
-      <% end %>
+        <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
+          <div>
+            <%= ApplicationHelper.tax_price(cart_item.item.price) %>
+          </div>
+        </div>
+        <%= form_with model: cart_item, url: public_cart_item_path(cart_item),local: true, method: :patch, class: "col-2 border border-dark d-flex align-items-center px-1 py-2" do |f| %>
+          <div class="col-12  row d-flex align-items-center mx-auto">
+            <div class="form-group h5 pt-3 mx-auto">
+              <%= f.select :amount, class: "form-control" do %>
+                <option selected="selected" class="text-light"><%= cart_item.amount %></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              <% end %>
+            </div>
+            <div class="mx-auto">
+              <%= f.submit "変更", class: 'btn btn-success' %>
+            </div>
+          </div>
+        <% end %>
+        <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
+          <div>
+            <% subtotal = ((cart_item.item.price*cart_item.amount)*1.1).to_i %>
+            <%= subtotal.to_s(:delimited, delimiter: ',' ) %>
+            <% total += subtotal %>
+          </div>
+        </div>
+        <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
+          <div class="col-10 mx-auto">
+            <%= link_to "削除する",public_cart_item_path(cart_item.id,cart_item), method: :delete, data: { cofirm: '本当に消しますか?' }, class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 
- <div class="mt-4">
-    <div class="col-12 row">
-      <div class="col-3 mx-auto">
+   <div class="mt-4">
+      <div class="col-12 row">
+        <div class="col-3 mx-auto">
+          <%= link_to "買い物を続ける",public_items_path,class: 'btn btn-primary py-2' %>
+        </div>
+        <div class="row col-4 px-0 ml-auto">
+          <div class="col-6 border border-dark bg-light px-1 py-3">
+            合計金額
+          </div>
+          <div class="col-6 border border-dark px-1 py-3">
+            <%= total.to_s(:delimited, delimiter: ',' )  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-5">
+        <div class="col-3 mx-auto">
+          <%= link_to "情報入力に進む",public_orders_path,class: 'btn btn-success px-4' %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="col-12">
+      <p class="col-4 my-5 mx-auto">カート内に商品がありません。</p>
+      <div class="col-3 my-5 mx-auto">
         <%= link_to "買い物を続ける",public_items_path,class: 'btn btn-primary py-2' %>
       </div>
-      <div class="row col-4 px-0 ml-auto">
-        <div class="col-6 border border-dark bg-light px-1 py-3">
-          合計金額
-        </div>
-        <div class="col-6 border border-dark px-1 py-3">
-          <%= total.to_s(:delimited, delimiter: ',' )  %>
-        </div>
-      </div>
     </div>
-    <div class="col-12 mt-5">
-      <div class="col-3 mx-auto">
-        <%= link_to "情報入力に進む",public_orders_path,class: 'btn btn-success px-4' %>
-      </div>
-    </div>
-  </div>
+  <% end %>
 
 </div>

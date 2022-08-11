@@ -12,7 +12,7 @@
         <b class="h3">¥ <%= ApplicationHelper.tax_price(@item.price) %></b>
         <span>(税込)</span>
       </div>
-      <%= form_with(model: @crat_item, url: public_cart_items_path, method: :post,local: true)do |f| %>
+      <%= form_with model: @crat_item, url: public_cart_items_path, method: :post, local: true do |f| %>
         <div class="ml-1 mt-5 h5 row">
           <%= f.hidden_field :item_id, :value => @item.id %>
           <%= f.hidden_field :customer_id, :value => @current_customer.id %>
