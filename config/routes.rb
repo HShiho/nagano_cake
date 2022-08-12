@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get '/customers/withdrawal' => 'customers#withdrawal',as: 'withdrawal'
     patch '/customers/withdrawal' => 'customers#breakaway',as: 'breakaway'
     delete '/cart_items' => 'cart_items#reset',as: 'reset'
+    post '/orders/confirm' => 'orders#confirm',as: 'confirm'
+    get '/orders/complete' => 'orders#complete',as: 'complete'
     resources :customers,except: [:new, :index, :delete]
     resources :cart_items,except: [:new, :show, :edit]
     resources :items,except: [:new, :create, :delete, :edit]
