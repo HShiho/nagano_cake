@@ -4,6 +4,12 @@ class Public::OrdersController < ApplicationController
   def new
     @current_customer = current_customer
     @order = Order.new
+    if request.post?
+      if params["my_address"]
+      elsif params["select_address"]
+      else params["new_address"]
+      end
+    end
   end
 
   def confirm

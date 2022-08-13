@@ -4,22 +4,36 @@
   </div>
 
   <%= form_with model: @order, url: public_confirm_path(@order), method: :post do |f| %>
-  <div>
+  <div class="px-3">
     <label class="m-0 h5">
       <b>支払い方法</b>
     </label>
-      <div class="form-check mx-3">
-        <div><%= f.radio_button :payment_method, "0" %><%= ApplicationRecord.payment_methods_i18n %></div>
-        <div><%= f.radio_button :payment_method, "1" %><%= ApplicationRecord.payment_methods_i18n %></div>
+      <div class="form-check mx-3 d-flex flex-column">
+        <%= f.collection_radio_buttons :payment_method, ApplicationRecord.payment_methods_i18n, :first , :last do |b| %>
+          <%= b.label(class: "radio_button my-1") { b.radio_button(class: "radio_button") + b.text } %>
+        <% end %>
       </div>
+
     <label class="m-0 h5 mt-3">
       <b>お届け先</b>
     </label>
-      <div class="form-check mx-3">
-        <div><%= f.radio_button :address, :ご自身の住所 %>　ご自身の住所</div>
-        <div><%= f.radio_button :address, :登録済み住所から選択 %>　登録済みの住所から選択</div>
-        <div><%= f.radio_button :address, :新しいお届け先 %>　新しいお届け先</div>
+      <div class="form-check mx-3 d-flex flex-column">
+        <div>
+          <%= f.radio_button "my_address", "ご自身の住所", checked: true, name: "address" %>
+          <%= label "my_address_ご自身の住所", "ご自身の住所", class: "my-1" %>
+          <p class="mb-0 ml-4">〒<%= @current_customer.postal_code %> <%= @current_customer.address %></p>
+          <p class="mb-0 ml-4"><%= ApplicationHelper.full_name(@current_customer.last_name , @current_customer.first_name) %></p>
+        </div>
+        <div>
+          <%= f.radio_button "select_address", "登録済み住所から選択", name: "address" %>
+          <%= label "select_address_登録済み住所から選択", "登録済み住所から選択", class: "mb-1 mt-3" %>
+        </div>
+        <div>
+          <%= f.radio_button "new_address", "新しいお届け先", name: "address" %>
+          <%= label "new_address_新しいお届け先", "新しいお届け先", class: "mb-1 mt-3" %>
+        </div>
       </div>
+      
     <div class="col-3 mx-auto my-4">
       <%= f.submit '確認画面に進む',class: 'btn btn-primary py-2 px-3 ml-4' %>
     </div>
