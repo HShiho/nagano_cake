@@ -1,13 +1,12 @@
 class Public::CartItemsController < ApplicationController
   layout 'public'
+  before_action :set_customer
 
   def index
-    @current_customer = current_customer
     @cart_items = current_customer.cart_items.all
   end
 
   def create
-    @current_customer = current_customer
     @cart_item = current_customer.cart_items.new(cart_items_params)
     if current_customer.cart_items.find_by(item_id: params[:item_id]).present?
       cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
