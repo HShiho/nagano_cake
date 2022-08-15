@@ -3,7 +3,7 @@
     <label class="h4 px-4 bg-light">注文情報入力</label>
   </div>
 
-  <%= form_with model: @order, url: public_confirm_path, method: :post do |f| %>
+  <%= form_with model: @order, url: public_confirm_path, method: :post, local: true do |f| %>
   <div class="px-3">
     <label class="m-0 h5">
       <b>支払い方法</b>
@@ -19,21 +19,21 @@
     </label>
       <div class="form-check mx-3 d-flex flex-column">
         <div>
-          <%= f.radio_button :address_number, 1, checked: true, name: "address" %>
-          <%= label :address_number_1, "ご自身の住所", class: "my-1" %>
+          <%= f.radio_button :address_number, 1, checked: true %>
+          <%= f.label :address_number_1, "ご自身の住所", class: "my-1" %>
           <p class="mb-0 ml-4">〒<%= @current_customer.postal_code %> <%= @current_customer.address %></p>
           <p class="mb-0 ml-4"><%= ApplicationHelper.full_name(@current_customer.last_name , @current_customer.first_name) %></p>
         </div>
         <div class=col-12"">
-          <%= f.radio_button :address_number, 2, name: "address" %>
-          <%= label :address_number_2, "登録済み住所から選択", class: "mb-1 mt-3" %>
+          <%= f.radio_button :address_number, 2 %>
+          <%= f.label :address_number_2, "登録済み住所から選択", class: "mb-1 mt-3" %>
           <div class="pl-4">
             <%= f.collection_select :register, Address.where(customer_id:["#{@current_customer.id}"]), :id, :select_register_addresses %>
           </div>
         </div>
         <div>
-          <%= f.radio_button :address_number, 3, name: "address" %>
-          <%= label :address_number_3, "新しいお届け先", class: "mb-1 mt-3" %>
+          <%= f.radio_button :address_number, 3%>
+          <%= f.label :address_number_3, "新しいお届け先", class: "mb-1 mt-3" %>
           <div class="mb-0 ml-2">
             <label class="col-3 px-3">郵便番号(ハイフンなし)</label>
             <%= f.text_field :postal_code, placeholder:"0000000", class: "col-2 px-1" %>
