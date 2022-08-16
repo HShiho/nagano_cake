@@ -9,24 +9,22 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params)
+    @order = Order.new
     session[:order] = @order
-
-      if params[:address_number] == "1"
+      if params[:order][:address_number] == "1"
         @order.postal_code = current_customer.postal_code
         @order.address = current_customer.address
         @order.name = ApplicationHelper.full_name(current_customer.last_name , current_customer.first_name)
-      elsif params[:address_number] == "2"
-        @order.postal_code = Address.find(params[:register]).postal_code
-        @order.address = Address.find(params[:register]).address
-        @order.name = Address.find(params[:register]).name
-      elsif params[:address_number] == "3"
-        address_new = Address.new(address_params)
-        address_new.customer_id = current_customer.id
+      elsif params[:order][:address_number] == "2"
+        @order.postal_code = Address.find(params[:order][:register]).postal_code
+        @order.address = Address.find(params[:order][:register]).address
+        @order.name = Address.find(params[:order][:register]).name
+      elsif params[:order][:address_number] == "3"
+        @order.postal_code = params[:order][:postal_code]
+        @order.address = params[:order][:address]
+        @order.name = params[:order][:name]
       else
-        @order.postal_code = current_customer.postal_code
-        @order.address = current_customer.address
-        @order.name = ApplicationHelper.full_name(current_customer.last_name , current_customer.first_name)
+
       end
 
     @cart_items = current_customer.cart_items.all
