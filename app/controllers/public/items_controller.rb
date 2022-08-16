@@ -1,8 +1,8 @@
 class Public::ItemsController < ApplicationController
   layout 'public'
+  before_action :set_customer
 
   def index
-    @current_customer = current_customer
     @genres = Genre.all
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
@@ -15,10 +15,16 @@ class Public::ItemsController < ApplicationController
   end
 
   def show
-    @current_customer = current_customer
     @genres = Genre.all
     @item = Item.find(params[:id])
     @cart_item = CartItem
+  end
+
+
+  private
+
+  def set_customer
+    @current_customer = current_customer
   end
 
 end

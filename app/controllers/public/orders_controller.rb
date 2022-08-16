@@ -9,8 +9,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new(order_params
-    )
+    @order = Order.new(order_params)
       if params[:order][:address_number] == "1"
         @order.postal_code = current_customer.postal_code
         @order.address = current_customer.address
@@ -34,8 +33,18 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-   
-    redirect_to pubkic_complete_path
+    @order = current_customer.orders.new(order_params)
+    @order.save
+    @cart_items = current_customer.cart_items.all
+      @cart_items.each do |cart_item|
+        @order_items = @order.order_items.new
+        @order_items.item_id = cart_item.item_id
+        @order_items.order_id = @order.id
+        @order_items.price = cart_item.item.taxin_price
+        @order_items.amount = cart_item.amount
+        @order_items.save
+      end
+    redirect_to public_complete_path
   end
 
   def complete
