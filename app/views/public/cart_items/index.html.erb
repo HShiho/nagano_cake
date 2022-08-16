@@ -66,10 +66,6 @@
         <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
           <div>
             <%= cart_item.sum_of_price.round.to_s(:delimited) %>
-            <!--問題なければ以下削除-->
-            <!--subtotal = ((cart_item.item.price*cart_item.amount)*1.1).to_i -->
-             <!--subtotal.to_s(:delimited, delimiter: ',' ) -->
-            <!--<total += subtotal-->
           </div>
         </div>
         <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
@@ -92,8 +88,6 @@
           </div>
           <div class="col-6 border border-dark px-1 py-3">
             <%= @total.round.to_s(:delimited) %>
-            <!--問題なければ以下削除-->
-             <!--total.to_s(:delimited, delimiter: ',' )  -->
           </div>
         </div>
       </div>

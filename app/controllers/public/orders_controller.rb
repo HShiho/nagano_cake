@@ -9,24 +9,24 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.new
-    session[:order] = @order
+    @order = Order.new(order_params
+    )
       if params[:order][:address_number] == "1"
         @order.postal_code = current_customer.postal_code
         @order.address = current_customer.address
         @order.name = ApplicationHelper.full_name(current_customer.last_name , current_customer.first_name)
       elsif params[:order][:address_number] == "2"
-        @order.postal_code = Address.find(params[:order][:register]).postal_code
-        @order.address = Address.find(params[:order][:register]).address
-        @order.name = Address.find(params[:order][:register]).name
+        @address = Address.find(params[:order][:register])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
       elsif params[:order][:address_number] == "3"
         @order.postal_code = params[:order][:postal_code]
         @order.address = params[:order][:address]
         @order.name = params[:order][:name]
       else
-
+　      redirect_to new_public_order_path
       end
-
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
     @postage = 800
@@ -34,8 +34,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-    !@order.save
+   
     redirect_to pubkic_complete_path
   end
 
