@@ -41,9 +41,9 @@
       </div>
       <div class="col-2 border border-dark px-1 py-2 d-flex align-items-center">
         <div>
-          <!--< @items.each do |item| %>-->
-            <!--<= item.name %><br>-->
-          <!--< end %>-->
+          <% order.order_items.each do |order_item| %>
+            <%= order_item.item.name %><br>
+          <% end %>
         </div>
       </div>
       <div class="col-1 border border-dark px-1 py-2 d-flex align-items-center">
