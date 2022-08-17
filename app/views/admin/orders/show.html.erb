@@ -83,8 +83,7 @@
             </td>
             <td class="pt-1">
               <div class="form-group h5">
-              <%= form_with model: @order_item, url: "/admin/order_items/#{@order.id}", method: :patch do |f| %>
-                <%= f.hidden_field :item_id, :value => order_item.item.id %>
+              <%= form_with model: @order_item, url: admin_order_item_path, method: :patch do |f| %>
                 <%= f.select :manufacture_status, OrderItem.manufacture_statuses_i18n.invert, { prompt: false },class: 'col-6' %>
                 <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
               <% end %>

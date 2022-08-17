@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
-    patch '/order_items/:id' => 'order_items#update'
+    patch '/order_items/:id' => 'order_items#update',as: 'order_item'
     patch '/orders/:id' => 'orders#order'
     get '/orders/:id/index' =>'orders#index',as: 'order_index'
     resources :genres
