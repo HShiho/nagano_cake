@@ -44,6 +44,7 @@ class Public::OrdersController < ApplicationController
         @order_items.amount = cart_item.amount
         @order_items.save
       end
+    @order_items.destroy_all
     redirect_to public_complete_path
   end
 
@@ -55,6 +56,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
 
