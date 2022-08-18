@@ -12,7 +12,7 @@
       </div>
       <div class="row col-9">
         <div class="col-8 px-1 py-1">
-          <%= f.number_field :postal_code, placeholder:"0000000", class: "col-5 px-1" %>
+          <%= f.text_field :postal_code, placeholder:"0000000", class: "col-5 px-1" %>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
           <%= f.text_field :name, placeholder:"令和道子", class: "col-5 px-1" %>
         </div>
         <div class="ml-3">
-          <%= f.submit "新規登録",class: 'btn btn-success btn-font-size-lg px-3' %>
+          <%= f.submit "新規登録",class: 'btn btn-success px-3' %>
         </div>
       </div>
     </div>

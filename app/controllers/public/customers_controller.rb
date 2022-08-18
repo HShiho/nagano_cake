@@ -1,13 +1,12 @@
 class Public::CustomersController < ApplicationController
   layout 'public'
+  before_action :set_customer
 
   def show
-    @current_customer = current_customer
     @customer = Customer.find(params[:id])
   end
 
   def edit
-    @current_customer = current_customer
     @customer = Customer.find(params[:id])
   end
 
@@ -18,11 +17,9 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdrawal
-    @current_customer = current_customer
   end
 
   def breakaway
-    @current_customer = current_customer
     @current_customer.update(is_deleted: true)
     reset_session
     redirect_to public_root_path
@@ -31,7 +28,11 @@ class Public::CustomersController < ApplicationController
 
 
 
-   private
+  private
+
+  def set_customer
+    @current_customer = current_customer
+  end
 
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email)

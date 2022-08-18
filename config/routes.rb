@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
-    patch '/order_items/:id' => 'order_items#update'
+    patch '/order_items/:id' => 'order_items#update',as: 'order_item'
     patch '/orders/:id' => 'orders#order'
     get '/orders/:id/index' =>'orders#index',as: 'order_index'
     resources :genres
@@ -30,6 +30,9 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about',as: 'about'
     get '/customers/withdrawal' => 'customers#withdrawal',as: 'withdrawal'
     patch '/customers/withdrawal' => 'customers#breakaway',as: 'breakaway'
+    delete '/cart_items' => 'cart_items#reset',as: 'reset'
+    post '/orders/confirm' => 'orders#confirm',as: 'confirm'
+    get '/orders/complete' => 'orders#complete',as: 'complete'
     resources :customers,except: [:new, :index, :delete]
     resources :cart_items,except: [:new, :show, :edit]
     resources :items,except: [:new, :create, :delete, :edit]
