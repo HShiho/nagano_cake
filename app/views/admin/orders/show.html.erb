@@ -67,7 +67,7 @@
           </tr>
         </thead>
         <tbody>
-        <% @order.order_items.each do |order_item| %>
+        <% @order_items.each do |order_item| %>
           <tr>
             <td>
               <%= order_item.item.name %>
@@ -83,7 +83,7 @@
             </td>
             <td class="pt-1">
               <div class="form-group h5">
-              <%= form_with model: @order_item, url: admin_order_item_path, method: :patch do |f| %>
+              <%= form_with model: order_item, url: admin_order_item_path, method: :patch do |f| %>
                 <%= f.select :manufacture_status, OrderItem.manufacture_statuses_i18n.invert, { prompt: false },class: 'col-6' %>
                 <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
               <% end %>

@@ -5,7 +5,6 @@ class Admin::OrderItemsController < ApplicationController
     @order_item.update(order_item_params)
     @order = @order_item.order_id
     redirect_to admin_order_path(@order)
-
   end
 
 

@@ -21,7 +21,7 @@
           <div class="col-3">
             <div><%= image_tag item.get_image(200,200) %></div>
             <div><b><%= item.name %></b></div>
-            <div><b>¥<%= ApplicationHelper.tax_price(item.price) %></b></div>
+            <div><b>¥<%= item.taxin_price.round.to_s(:delimited) %></b></div>
           </div>
         <% end %>
       </div>
