@@ -46,19 +46,21 @@
         <tr>
           <td>会員ステータス</td>
           <td>
-            <b><%= ApplicationHelper.withdrawal_or_valibity(@customer.is_deleted) %></b>
+            <b class='<%= @customer.success_color_or %>'>
+              <%= @customer.withdrawal_or_valibity %>
+            </b>
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
             <div class="btn-toolbar">
-              <div class="btn-group my-3 ">
-                <div class="col-6">
-                  <%= link_to '編集する',edit_admin_customer_path, class: 'btn btn-success rounded-lg py-3 px-5' %>
+              <div class="btn-group my-2 ">
+                <div class="col-6 pl-0">
+                  <%= link_to '編集する',edit_admin_customer_path, class: 'btn btn-success rounded-lg py-2 px-4' %>
                 </div>
-                <div class="col-7">
-                  <%= link_to '注文履歴一覧を見る',admin_order_index_path, controller: 'orders', class: 'btn btn-primary rounded-lg py-3 px-4' %>
+                <div class="col-8">
+                  <%= link_to '注文履歴一覧を見る',admin_order_index_path, controller: 'orders', class: 'btn btn-primary rounded-lg py-2 px-4' %>
                 </div>
               </div>
             </div>
