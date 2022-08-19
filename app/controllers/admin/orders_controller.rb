@@ -3,7 +3,7 @@ class Admin::OrdersController < ApplicationController
 
   def index
     @order = Order.find(params[:id])
-    @orders = Order.where(customer_id: "#{params[:id]}")
+    @orders = Order.where(customer_id: "#{params[:id]}").page(params[:page])
   end
 
   def show
