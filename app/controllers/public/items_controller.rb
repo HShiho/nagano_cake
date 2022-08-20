@@ -7,11 +7,12 @@ class Public::ItemsController < ApplicationController
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @item = @genre.items.order("created_at DESC").all
-      @items = @item.where.not(is_active: false).page(params[:page]).per(8)
+    elsif params[:search]
+      @item = Item.where("name LIKE ?",'%' + params[:search] + '%')
     else
       @item = Item.order("created_at DESC").all
-      @items = @item.where.not(is_active: false).page(params[:page]).per(8)
     end
+    @items = @item.where.not(is_active: false).page(params[:page]).per(8)
   end
 
   def show

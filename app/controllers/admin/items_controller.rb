@@ -13,7 +13,13 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all.page(params[:page])
+    if params[:search] == nil
+      @items = Item.all.page(params[:page])
+    elsif params[:search] ==  ''
+      @items = Item.all.page(params[:page])
+    else
+      @items = Item.where("name LIKE ?",'%' + params[:search] + '%').page(params[:page])
+    end
   end
 
   def show
