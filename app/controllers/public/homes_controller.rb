@@ -4,7 +4,8 @@ class Public::HomesController < ApplicationController
 
   def top
     @genres = Genre.all
-    @items = Item.limit(4).order("created_at DESC")
+    @item = Item.limit(4).order("created_at DESC")
+    @items = @item.where.not(is_active: false)
   end
 
   def about
