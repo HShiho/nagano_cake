@@ -13,8 +13,13 @@ class Admin::OrdersController < ApplicationController
 
   def order
     @order = Order.find(params[:id])
-    @order.update(order_params)
-    redirect_to admin_order_path(@order.id)
+    if @order.update(order_params)
+      @order.order_items.update(manufacture_status: "waiting_for_production") if @order.order_status == "payment_confirmation"
+    end
+    redirect_to admin_order_path
+    # @order = Order.find(params[:id])
+    # @order.update(order_params)
+    # redirect_to admin_order_path(@order.id)
   end
 
 
