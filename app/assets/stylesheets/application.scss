@@ -2,14 +2,19 @@
  * require_tree .
  * requir_self
  */
-@import "bootstrap-sprockets" ;
-@import "bootstrap" ;
 
 .top-image {
-  height: 100%;
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-image: image-url('bg-image.jpg');
-  background-color: red;
+  background-image: image-url("bg-image.jpg");
+}
+
+.top-message {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.about-image {
+  width: 100%;
+  background-size: cover;
 }
