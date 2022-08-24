@@ -2,7 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   layout 'public'
-  
+
   def after_sign_in_path_for(resource)
     public_root_path
   end
@@ -10,7 +10,18 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     new_customer_session_path
   end
-  
+
+  # 会員論理削除、退会後は同じアカウントでサインインできないようにする
+  def reject_customer
+    @customer = Customer.find_by(email: params[:customer][:email])
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+        redirect_to new_customer_session_path
+      else
+      end
+    end
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
