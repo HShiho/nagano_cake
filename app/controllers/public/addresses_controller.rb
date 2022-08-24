@@ -6,18 +6,22 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @addresses = Address.where(customer_id:[current_customer.id])
+    @error = @address
   end
 
   def edit
     @address = Address.find(params[:id])
+    @error = @address
   end
 
   def create
     @address = Address.new(address_params)
     @address.customer_id = current_customer.id
+    @error = @address
     if @address.save
       redirect_to public_addresses_path
-    else  @address = Address.new
+    else
+      @address = Address.new
       @addresses = Address.where(customer_id:[current_customer.id])
       render :index
     end
@@ -25,9 +29,11 @@ class Public::AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:id])
+    @error = @address
     if @address.update(address_params)
       redirect_to public_addresses_path
     else
+      @address = Address.find(@address.id)
       render :edit
     end
   end
