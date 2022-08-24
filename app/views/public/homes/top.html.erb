@@ -2,16 +2,18 @@
   <%= render partial: 'layouts/genre_search',locals: { genres: @genres } %>
 
   <div class="col-9 mt-3 mx-auto">
-    <div class="col-12 bg-warning bg-opacity-25 py-5 px-5">
-      <div class="bg-white text-center py-5 px-2">
-        <p class="mb-0">
-          ようこそ、ながのCAKEへ！<br>
-          このサイトは、ケーキ販売のECサイトになります。<br>
-          会員でない方も商品の閲覧はできますが、<br>
-          購入には会員登録が必要になります。
-        </p>
+    <div class="top-image">
+      <div class="top-message col-12 py-5 px-5">
+        <div class="text-center py-5 px-2">
+          <p class="mb-0">
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+        </div>
       </div>
-    </div>
     <div>
       <h2 class="py-4">
         <b>新着商品</b>
@@ -19,7 +21,11 @@
       <div class="row">
         <% @items.each do |item| %>
           <div class="col-3">
-            <div><%= image_tag item.get_image(200,200) %></div>
+            <div>
+              <%= link_to public_item_path(item.id) do %>
+                <%= image_tag item.get_image(200,200) %>
+              <% end %>
+              </div>
             <div><b><%= item.name %></b></div>
             <div><b>¥<%= item.taxin_price.round.to_s(:delimited) %></b></div>
           </div>

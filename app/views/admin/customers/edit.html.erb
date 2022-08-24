@@ -1,11 +1,13 @@
 <div class="container px-5 px-sm-0 pt-4">
 
   <div class="col-md-12">
+    <div><%= render partial: 'layouts/error_message' %></div>
     <label class="h4 px-4 bg-light">
         <%= ApplicationHelper.full_name(@customer.last_name , @customer.first_name) %>さんの会員情報編集
     </label>
   </div>
 
+  <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
   <div class="pt-4 col-11">
     <table class="table table-borderless">
       <tbody>
@@ -13,7 +15,6 @@
           <td class="col-3">会員ID</td>
           <td><%= @customer.id %></td>
         </tr>
-      <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
         <tr>
           <td class="pb-6">氏名</td>
           <td class="py-2">
@@ -66,7 +67,7 @@
         </tr>
         <tr>
           <td class="pb-6">会員ステータス</td>
-          <td class="py-2 form-check form-check-inline">
+          <td class="py-2 pl-0 form-check form-check-inline">
     　       <div class="border-bottom h5">
               <%= f.radio_button :is_deleted,"false" %> 有効
             </div>
@@ -78,12 +79,12 @@
         <tr>
           <td></td>
           <td>
-            <%= f.submit '変更を保存',class: 'btn btn-success rounded-lg py-3 px-5' %>
+            <%= f.submit '変更を保存',class: 'btn btn-success rounded-lg py-2 px-4' %>
           </td>
         </tr>
-    </tbody>
-  </table>
-      <% end %>
-      </div>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
 
 </div>

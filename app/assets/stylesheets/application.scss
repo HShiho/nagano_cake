@@ -1,0 +1,21 @@
+/*
+ * require_tree .
+ * requir_self
+ */
+
+.top-image {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: image-url("bg-image.jpg");
+}
+
+.top-message {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

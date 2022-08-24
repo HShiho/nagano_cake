@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -58,17 +59,15 @@
           <div class="row">
           <h2>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cookie-bite"></i></h2>
           <!--検索窓-->
-          <form class="col-3 py-0 px-0 mr-3 ml-auto">
-            <div class="input-group ">
-              <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                  <button class="btn btn-outline-primary" type="submit" id="button-addon2">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </span>
+            <div class="search-form col-2 py-1 px-1 my-2 mr-3 ml-auto border border-secondary">
+              <%= form_tag({controller:"admin/items", action:"index"}, method: :get) do %>
+                <%= text_field_tag( "search","",{ placeholder: "Search", class: "p-0 col-10", style: "border: none" }) %>
+                <%= button_tag type: 'submit', class: 'btn btn-outline-primary px-1 py-0 col-1', style: "border: none" do %>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                <% end %>
+              <% end %>
             </div>
-          </form>
-            <!------->
+          <!------->
           </div>
       </div>
     </header>

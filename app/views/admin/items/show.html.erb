@@ -30,15 +30,17 @@
             <td>税込価格<br>（税抜価格）</td>
             <td>
               <div class="h4 d-flex align-items-center" style="height:36px;">
-                <%= ApplicationHelper.tax_price(@item.price) %>
-                <span>(</span><%= ApplicationHelper.digit_price(@item.price) %><span>)円</span>
+                <%= @item.taxin_price %>
+                <span>(</span><%= @item.price.round.to_s(:delimited) %><span>)円</span>
               </div>
             </td>
           </tr>
           <tr>
             <td>販売ステータス</td>
             <td>
-              <b><%= ApplicationHelper.sale_or_stop(@item.is_active) %></b>
+              <b class='<%= @item.success_color_or %>'>
+                <%= @item.sale_or_stop %>
+              </b>
             </td>
           </tr>
          </tbody>

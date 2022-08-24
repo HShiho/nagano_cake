@@ -1,19 +1,33 @@
 class Admin::ItemsController < ApplicationController
   layout 'admin'
+  before_action :authenticate_admin!
 
   def new
     @item = Item.new
     @genres = Genre.all
+    @error = @item
   end
 
   def create
     @item = Item.new(item_params)
-    @item.save
-    redirect_to admin_items_path
+    @error = @item
+    if @item.save
+     redirect_to admin_item_path(@item.id)
+    else
+     @item = Item.new
+     @genres = Genre.all
+     render :new
+    end
   end
 
   def index
-    @items = Item.all
+    if params[:search] == nil
+      @items = Item.all.page(params[:page])
+    elsif params[:search] ==  ''
+      @items = Item.all.page(params[:page])
+    else
+      @items = Item.where("name LIKE ?",'%' + params[:search] + '%').page(params[:page])
+    end
   end
 
   def show

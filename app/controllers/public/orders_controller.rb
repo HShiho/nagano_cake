@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
   layout 'public'
+  before_action :authenticate_customer!
   before_action :set_customer
 
   def new
@@ -44,7 +45,7 @@ class Public::OrdersController < ApplicationController
         @order_items.amount = cart_item.amount
         @order_items.save
       end
-    @order_items.destroy_all
+    @cart_items.destroy_all
     redirect_to public_complete_path
   end
 
@@ -52,7 +53,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders.all
+    @orders = current_customer.orders.all.order("created_at DESC")
   end
 
   def show

@@ -28,7 +28,7 @@
           <%= f.radio_button :address_number, 2 %>
           <%= f.label :address_number_2, "登録済み住所から選択", class: "mb-1 mt-3" %>
           <div class="pl-4">
-            <%= f.collection_select :register, Address.where(customer_id:["#{@current_customer.id}"]), :id, :select_register_addresses %>
+            <%= f.collection_select :register, Address.where(customer_id:["#{@current_customer.id}"]), :id, :select_register_addresses, { prompt: false }, class: 'col-11' %>
           </div>
         </div>
         <div>

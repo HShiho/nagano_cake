@@ -8,7 +8,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_out_path_for(resource)
-    new_customer_session_path
+    public_root_path(resource)
   end
 
 

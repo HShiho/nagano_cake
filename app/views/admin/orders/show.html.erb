@@ -48,7 +48,7 @@
         <div class="col-8 pl-0">
           <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
             <%= f.select :order_status, Order.order_statuses_i18n.invert, { prompt: false },class: 'col-3' %>
-            <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
+            <%= f.submit '更新',class: 'btn btn-success py-2 px-2 ml-3' %>
           <% end %>
         </div>
     </div>
@@ -81,11 +81,11 @@
             <td>
               <%= order_item.sum_of_price.round.to_s(:delimited) %>
             </td>
-            <td class="pt-1">
-              <div class="form-group h5">
-              <%= form_with model: @order_item, url: admin_order_item_path, method: :patch do |f| %>
-                <%= f.select :manufacture_status, OrderItem.manufacture_statuses_i18n.invert, { prompt: order_item.manufacture_status_i18n },class: 'col-6' %>
-                <%= f.submit '更新',class: 'btn btn-success py-2 px-3 ml-4' %>
+            <td>
+              <div class="form-group">
+              <%= form_with model: order_item, url: admin_order_item_path(order_item), method: :patch do |f| %>
+                <%= f.select :manufacture_status, OrderItem.manufacture_statuses_i18n.invert, { prompt: false },class: 'col-7 py-2 px-3' %>
+                <%= f.submit '更新',class: 'btn btn-success py-2 px-2 ml-3' %>
               <% end %>
               </div>
             </td>

@@ -34,18 +34,22 @@
                 <u><%= link_to item.name, admin_item_path(item.id), class: 'text-dark' %></u>
               </td>
               <td>
-                <%= ApplicationHelper.digit_price(item.price) %>
+                <%= item.price.round.to_s(:delimited) %>
               </td>
               <td>
                 <%= item.genre.name %>
               </td>
               <td>
-                <b><%= ApplicationHelper.sale_or_stop(item.is_active) %></b>
+                <b class='<%= item.success_color_or %>'>
+                  <%= item.sale_or_stop %>
+                </b>
               </td>
             </tr>
         </tbody>
           <% end %>
       </table>
     </div>
+
+  <%= paginate @items %>
 
 </div>

@@ -6,8 +6,29 @@ class Item < ApplicationRecord
   has_many :order_items, dependent: :destroy
   belongs_to :genre
 
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :genre_id, presence: true
+  validates :price, presence: true
+
   def taxin_price
-    self.price * 1.1
+    (self.price * 1.1).floor
+  end
+
+  def sale_or_stop
+    "#{is_active ? '販売中' : '販売停止中'}"
+  end
+
+  def success_color_or
+    success_color = self.is_active
+    case success_color
+    when true
+      "text-success"
+    when false
+      "text-secondary"
+    else
+      "text-primary"
+    end
   end
 
 

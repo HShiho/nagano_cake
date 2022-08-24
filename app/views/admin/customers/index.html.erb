@@ -25,12 +25,16 @@
           </td>
           <td><%= customer.email %></td>
           <td>
-            <b><%= ApplicationHelper.withdrawal_or_valibity(customer.is_deleted) %></b>
+            <b class='<%= customer.success_color_or %>'>
+              <%= customer.withdrawal_or_valibity %>
+            </b>
           </td>
         </tr>
       </tbody>
         <% end %>
     </table>
   </div>
+
+<%= paginate @customers %>
 
 </div>

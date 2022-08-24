@@ -1,5 +1,6 @@
 class Public::CartItemsController < ApplicationController
   layout 'public'
+  before_action :authenticate_customer!
   before_action :set_customer
 
   def index

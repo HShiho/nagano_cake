@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   layout 'public'
+  before_action :authenticate_customer!
   before_action :set_customer
 
   def show
@@ -8,12 +9,18 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    @error = @customer
   end
 
   def update
-     @customer = Customer.find(params[:id])
-     @customer.update(customer_params)
-     redirect_to public_customer_path(@customer.id)
+    @customer = Customer.find(params[:id])
+    @error = @customer
+    if @customer.update(customer_params)
+      redirect_to public_customer_path(@customer.id)
+    else
+      @customer = Customer.find(@customer.id)
+      render :edit
+    end
   end
 
   def withdrawal
