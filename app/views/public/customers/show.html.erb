@@ -1,0 +1,85 @@
+<div class="container px-5 px-sm-0 pt-4 pb-5">
+
+  <div class="pl-5 ml-5">
+    <label class="h4 px-4 bg-light">マイページ</label>
+  </div>
+
+  <div class="row my-3 d-flex align-items-center">
+    <div class="col-2 h5 mb-0 pl-0">
+      <b>登録情報</b>
+    </div>
+    <div>
+      <%= link_to  "編集する",edit_public_customer_path, class: 'btn btn-success btn-font-size-lg px-4' %>
+    </div>
+  </div>
+
+  <div class="py-2">
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        氏名
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.last_name %>　<%= @customer.first_name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        カナ
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.last_name_kana %>　<%= @customer.first_name_kana %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        郵便番号
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.postal_code %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        住所
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.address %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        電話番号
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.telephone_number %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 border border-dark bg-light px-1 py-2">
+        メールアドレス
+      </div>
+      <div class="col-6 border border-dark px-1 py-2">
+        <%= @customer.email %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-3 d-flex align-items-center">
+    <div class="col-2 h5 mb-0 pl-0">
+      <b>配送先</b>
+    </div>
+    <div>
+      <%= link_to  "一覧を見る",public_addresses_path, class: 'btn btn-primary btn-font-size-lg px-4' %>
+    </div>
+  </div>
+
+  <div class="row my-3 d-flex align-items-center">
+    <div class="col-2 h5 mb-0 pl-0">
+      <b>注文履歴</b>
+    </div>
+    <div>
+      <%= link_to  "一覧を見る",public_orders_path, class: 'btn btn-primary btn-font-size-lg px-4' %>
+    </div>
+  </div>
+
+</div>

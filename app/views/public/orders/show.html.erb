@@ -1,0 +1,113 @@
+<div class="container px-5 px-sm-0 pt-4 pb-5">
+
+  <div class="pl-5 ml-5">
+    <label class="h4 px-4 bg-light">注文履歴詳細</label>
+  </div>
+
+  <div class="col-12 row">
+    <div class="col-8 py-2 mt-3">
+      <b>注文情報</b>
+      <div class="row d-flex align-items-center pl-3 mt-2">
+        <div class="col-2 border border-dark bg-light px-1 py-3">
+          注文日
+        </div>
+        <div class="col-10 border border-dark px-1 py-3">
+          <%= @order.created_at.strftime('%Y/%m/%d') %>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center pl-3">
+        <div class="col-2 border border-dark bg-light px-1 py-3">
+          <br>
+          配送先<br>
+          <br>
+        </div>
+        <div class="col-10 border border-dark px-1 py-3">
+          <%= @order.postal_code %><br>
+          <%= @order.address %><br>
+          <%= @order.name %>
+        </div>
+      </div>
+       <div class="row d-flex align-items-center pl-3">
+        <div class="col-2 border border-dark bg-light px-1 py-3">
+          支払方法
+        </div>
+        <div class="col-10 border border-dark px-1 py-3">
+          <%= @order.payment_method_i18n %>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center pl-3">
+        <div class="col-2 border border-dark bg-light px-1 py-3">
+          ステータス
+        </div>
+        <div class="col-10 border border-dark px-1 py-3">
+          <%= @order.order_status_i18n %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 py-2 mt-3">
+      <b>請求情報</b>
+      <div class="row d-flex align-items-center pl-3 mt-2">
+        <div class="col-6 border border-dark bg-light px-1 py-3">
+          商品合計
+        </div>
+        <div class="col-5 border border-dark px-1 py-3">
+          <% @total = @order.billing_amount - @order.postage %>
+          <%= @total.round.to_s(:delimited) %>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center pl-3">
+        <div class="col-6 border border-dark bg-light px-1 py-3">
+          送料
+        </div>
+        <div class="col-5 border border-dark px-1 py-3">
+          <%= @order.postage.round.to_s(:delimited) %>
+        </div>
+      </div>
+      <div class="row d-flex align-items-center pl-3">
+        <div class="col-6 border border-dark bg-light px-1 py-3">
+          <b>ご請求額</b>
+        </div>
+        <div class="col-5 border border-dark px-1 py-3">
+          <%= @order.billing_amount.round.to_s(:delimited) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="col-10 py-2 px-0">
+      <b>注文内容</b>
+      <div class="row d-flex align-items-center pl-3 mt-2">
+        <div class="col-8 border border-dark bg-light px-1 py-3">
+          商品
+        </div>
+        <div class="col-2 border border-dark bg-light px-1 py-3">
+          単価(税込)
+        </div>
+        <div class="col-1 border border-dark bg-light px-1 py-3">
+          個数
+        </div>
+        <div class="col-1 border border-dark bg-light px-1 py-3">
+          小計
+        </div>
+      </div>
+      <% @order.order_items.each do |order_item| %>
+      <div class="row d-flex align-items-center pl-3">
+        <div class="col-8 border border-dark px-1 py-3">
+          <%= order_item.item.name %>
+        </div>
+        <div class="col-2 border border-dark px-1 py-3">
+          <%= order_item.item.taxin_price.round.to_s(:delimited) %>
+        </div>
+        <div class="col-1 border border-dark px-1 py-3">
+          <%= order_item.amount %>
+        </div>
+        <div class="col-1 border border-dark px-1 py-3">
+          <%= order_item.sum_of_price.round.to_s(:delimited) %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

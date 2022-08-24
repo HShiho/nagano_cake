@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCakeApp</title>
+    <title>ながのCAKE</title>
+
+    <script src="https://kit.fontawesome.com/3d818d0ed0.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-      <div>LOGO</div>
-      <% if admin_signed_in? %>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <%= link_to '商品一覧',admin_items_path %>
-              </li>
-              <li>会員一覧</li>
-              <li>注文履歴一覧</li>
-              <li>
-                <%= link_to 'ジャンル一覧',admin_genres_path %>
-              </li>
-              <li>
-                <%= link_to 'ログアウト',destroy_admin_session_path, method: :delete %>
-              </li>
-            </ul>
+  <body class="d-flex flex-column vh-100">
+    <header class="border-bottom pb-2">
+      <div class="container col-11">
+        <nav class="navbar navbar-expand-lg navbar-light mt-2 pt-4 pb-3 pr-0">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <% if admin_signed_in? %>
+                    <li class="nav-item mx-3">
+                      <%= link_to '商品一覧',admin_items_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '会員一覧',admin_customers_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '注文履歴一覧',admin_root_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to 'ジャンル一覧',admin_genres_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item ml-3 mr-0">
+                      <%= link_to 'ログアウト',destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border rounded'%>
+                    </li>
+                  <% else %>
+                    <li class="nav-item mx-3">
+                      <%= link_to 'About',public_about_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '商品一覧',public_items_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to '新規登録',new_customer_registration_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                    <li class="nav-item mx-3">
+                      <%= link_to 'ログイン',new_customer_session_path, class: 'nav-link text-dark border rounded' %>
+                    </li>
+                  <% end %>
+                </ul>
+            </div>
           </nav>
-        </div>
-      <% else %>
-        <div>
-          <nav>
-            <ul>
-              <li>About</li>
-              <li>商品一覧</li>
-              <li>新規登録</li>
-              <li>ログイン</li>
-            </ul>
-          </nav>
-        </div>
-      <% end %>
+          <div class="row">
+          <h2>ながの<strong><span style="color:orange">C</span></strong>AKE<i class="fa-solid fa-cookie-bite"></i></h2>
+          <!--検索窓-->
+            <div class="search-form col-2 py-1 px-1 my-2 mr-3 ml-auto border border-secondary">
+              <%= form_tag({controller:"admin/items", action:"index"}, method: :get) do %>
+                <%= text_field_tag( "search","",{ placeholder: "Search", class: "p-0 col-10", style: "border: none" }) %>
+                <%= button_tag type: 'submit', class: 'btn btn-outline-primary px-1 py-0 col-1', style: "border: none" do %>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                <% end %>
+              <% end %>
+            </div>
+          <!------->
+          </div>
+      </div>
     </header>
 
-    <mian>
+    <mian class="mb-auto">
       <%= yield %>
     </mian>
 
-    <footer>
+    <footer class="pt-5 pb-4 border-top">
 
     </footer>
 

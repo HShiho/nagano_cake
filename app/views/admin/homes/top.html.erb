@@ -1,2 +1,40 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container px-5 px-sm-0 pt-4">
+
+    <div class="col-md-12 row">
+      <label class="h4 px-4 bg-light">注文履歴一覧</label>
+    </div>
+
+    <div class="pt-4">
+      <table class="table table-hover table-inverse col-12">
+        <thead class="bg-light">
+          <tr>
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td class="col-3">
+              <u><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'),admin_order_path(order.id), class: 'text-dark' %></u>
+            </td>
+            <td class="col-3">
+              <%= ApplicationHelper.full_name(order.customer.last_name , order.customer.first_name) %>
+            </td>
+            <td class="col-3">
+              <%= order.order_items.sum(:amount) %>
+            </td>
+            <td class="col-3">
+              <%= order.order_status_i18n %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+    
+  <%= paginate @orders %>
+
+</div>

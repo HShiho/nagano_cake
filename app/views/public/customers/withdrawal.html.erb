@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div class="col-3 mx-auto mt-5 py-4 h5">
+    <b>本当に退会しますか？</b>
+  </div>
+
+  <div class="text-center h5">
+    <p>退会すると、会員登録情報や<br>
+    これまでの購入履歴が閲覧できなくなります。<br>
+    退会する場合は、「退会する」をクリックしてください。</p>
+  </div>
+
+  <div class="row py-3">
+    <div class="col-2 px-3 ml-auto">
+      <%= link_to "退会しない",edit_public_customer_path(@current_customer.id),class: 'btn btn-primary btn-font-size-lg px-3' %>
+    </div>
+    <div class="col-2 px-3 mr-auto">
+      <%= link_to "退会する",public_withdrawal_path, method: :patch, class: 'btn btn-danger btn-font-size-lg px-3' %>
+    </div>
+  </div>
+
+</div>

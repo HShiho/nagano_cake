@@ -1,0 +1,40 @@
+<div class="container px-5 px-sm-0 pt-4">
+
+  <div class="col-md-12 row">
+    <label class="h4 px-4 bg-light">会員一覧</label>
+  </div>
+
+  <div class="col-10 pt-4 mx-auto">
+    <table class="table table-hover table-inverse">
+      <thead class="bg-light">
+        <tr>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.id %></td>
+          <td>
+            <u>
+              <%= link_to ApplicationHelper.full_name(customer.last_name , customer.first_name), admin_customer_path(customer.id), class: 'text-dark' %>
+            </u>
+          </td>
+          <td><%= customer.email %></td>
+          <td>
+            <b class='<%= customer.success_color_or %>'>
+              <%= customer.withdrawal_or_valibity %>
+            </b>
+          </td>
+        </tr>
+      </tbody>
+        <% end %>
+    </table>
+  </div>
+
+<%= paginate @customers %>
+
+</div>

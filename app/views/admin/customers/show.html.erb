@@ -1,0 +1,73 @@
+<div class="container px-5 px-sm-0 pt-4">
+
+  <div class="col-md-12">
+    <label class="h4 px-4 bg-light">
+       <%= ApplicationHelper.full_name(@customer.last_name , @customer.first_name) %>さんの会員詳細
+    </label>
+  </div>
+
+  <div class="pt-4 col-8">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td>会員ID</td>
+          <td><%= @customer.id %> </td>
+        </tr>
+        <tr>
+          <td>氏名</td>
+          <td>
+            <%= @customer.last_name %>
+            <%= @customer.first_name %>
+          </td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td>
+            <%= @customer.last_name_kana %>
+            <%= @customer.first_name_kana %>
+          </td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td><%= @customer.address %></td>
+       </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td>会員ステータス</td>
+          <td>
+            <b class='<%= @customer.success_color_or %>'>
+              <%= @customer.withdrawal_or_valibity %>
+            </b>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <div class="btn-toolbar">
+              <div class="btn-group my-2 ">
+                <div class="col-6 pl-0">
+                  <%= link_to '編集する',edit_admin_customer_path, class: 'btn btn-success rounded-lg py-2 px-4' %>
+                </div>
+                <div class="col-8">
+                  <%= link_to '注文履歴一覧を見る',admin_order_index_path, controller: 'orders', class: 'btn btn-primary rounded-lg py-2 px-4' %>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,38 +1,55 @@
-<label>商品一覧</label>
+<div class="container px-5 px-sm-0 pt-4">
 
-<!--後でプラスマークのボタンリンクに変更する-->
-<%= link_to '新規登録',new_admin_item_path %>
-<br>
+    <div class="col-md-12 row">
+      <label class="h4 px-4 bg-light">商品一覧</label>
+        <!--商品新規登録画面リンクボタン-->
+        <div class="btn-group ml-auto">
+          <%= link_to new_admin_item_path do %>
+            <button type="button" class="btn btn-white rounded-circle p-0 shadow-sm" style="width:2.5rem;height:2.5rem;">
+              <i class="fa-solid fa-plus fa-lg" style="color:grey;"></i>
+            </button>
+          <% end %>
+        </div>
+        <!------->
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-      <th>ジャンル</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td>
-          <%= item.id %>
-        </td>
-        <td>
-          <%= link_to item.name, admin_item_path(item.id) %>
-        </td>
-        <td>
-          <%= ApplicationHelper.digit_price(item.price) %>
-        </td>
-        <td>
-          <%= item.genre.name %>
-        </td>
-        <td>
-          <%= ApplicationHelper.sale_or_stop(item.is_active) %>
-        </td>
-      </tr>
-  </tbody>
-    <% end %>
-</table>
+    <div class="pt-4">
+      <table class="table table-hover table-inverse">
+        <thead class="bg-light">
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td>
+                <%= item.id %>
+              </td>
+              <td>
+                <u><%= link_to item.name, admin_item_path(item.id), class: 'text-dark' %></u>
+              </td>
+              <td>
+                <%= item.price.round.to_s(:delimited) %>
+              </td>
+              <td>
+                <%= item.genre.name %>
+              </td>
+              <td>
+                <b class='<%= item.success_color_or %>'>
+                  <%= item.sale_or_stop %>
+                </b>
+              </td>
+            </tr>
+        </tbody>
+          <% end %>
+      </table>
+    </div>
+
+  <%= paginate @items %>
+
+</div>

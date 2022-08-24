@@ -1,0 +1,90 @@
+<div class="container px-5 px-sm-0 pt-4">
+
+  <div class="col-md-12">
+    <div><%= render partial: 'layouts/error_message' %></div>
+    <label class="h4 px-4 bg-light">
+        <%= ApplicationHelper.full_name(@customer.last_name , @customer.first_name) %>さんの会員情報編集
+    </label>
+  </div>
+
+  <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+  <div class="pt-4 col-11">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td class="col-3">会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <td class="pb-6">氏名</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.text_field :last_name, placeholder:"姓",class: 'mr-3' %>
+              <%= f.text_field :first_name, placeholder:"名",class: 'ml-3' %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">フリガナ</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.text_field :last_name_kana, placeholder:"セイ",class: 'mr-3' %>
+              <%= f.text_field :first_name_kana, placeholder:"メイ",class: 'ml-3' %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">郵便番号</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.number_field :postal_code, placeholder:"ハイフンなし" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">住所</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.text_area :address, placeholder:"ここに住所を記入してください", class: 'col-10 px-1', rows: '1' %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">電話番号</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.number_field :telephone_number, placeholder:"ハイフンなし" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">メールアドレス</td>
+          <td class="py-2">
+            <div class="form-group mb-0">
+              <%= f.email_field :email, placeholder:"xxxxx@xxx" %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="pb-6">会員ステータス</td>
+          <td class="py-2 pl-0 form-check form-check-inline">
+    　       <div class="border-bottom h5">
+              <%= f.radio_button :is_deleted,"false" %> 有効
+            </div>
+            <div class="border-bottom ml-4 h5">
+              <%= f.radio_button :is_deleted,"true" %> 退会
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <%= f.submit '変更を保存',class: 'btn btn-success rounded-lg py-2 px-4' %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+
+</div>
